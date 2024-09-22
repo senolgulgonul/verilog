@@ -8,17 +8,15 @@ module testbench;
               .A0(a0),.A1(a1),.G(g));
   initial begin
     $dumpfile("dump.vcd"); $dumpvars;
-    $display("A1A0G : Y3Y2Y1Y0");
+    $display("GA1A0 : Y0Y1Y2Y3");
     $monitor("%b %b %b : %b %b %b %b"
-             ,a1,a0,g,y3,y2,y1,y0);
-    #1 a1=0; a0=0; g=1;
-    #1 a1=0; a0=1; g=1;
-    #1 a1=1; a0=0; g=1;
-    #1 a1=1; a0=1; g=1;
-    #1 a1=0; a0=0; g=0;
-    #1 a1=0; a0=1; g=0;
-    #1 a1=1; a0=0; g=0;
-    #1 a1=1; a0=1; g=0;
+             ,g,a1,a0,y0,y1,y2,y3);
+    #1 g=1; a1=0; a0=0;
+    #1 g=1; a1=0; a0=1;
+    #1 g=1; a1=1; a0=0;
+    #1 g=1; a1=1; a0=1;
+    #1 g=0; a1=0; a0=0; 
+    #1 g=0; a1=0; a0=1; 
     #10 $finish;
   end // initial
 endmodule
