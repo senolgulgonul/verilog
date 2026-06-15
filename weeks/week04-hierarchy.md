@@ -67,7 +67,7 @@ module fourbitadder(
 endmodule
 ```
 
-![4-bit ripple-carry adder: M0..M3 full adders, carry chain C0->C1->C2->C3->C4](../images/fourbitadder.svg)
+![4-bit ripple-carry adder: M0..M3 full adders, carry chain C0->C1->C2->C3->C4](../images/fourbitadder.png)
 
 **`testbench.v`** — check against the `+` reference
 ```verilog

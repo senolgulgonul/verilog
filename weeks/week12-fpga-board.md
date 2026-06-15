@@ -30,7 +30,7 @@ of **Look-Up Tables**. A 4-input LUT is a 16×1 memory — program its cells and
 > LEDs are common-anode from the supply, so drive a pin **low** to light it. Keep logic
 > positive and invert once at the pins. Gowin EDA is **free, no license**.
 
-![Tang Nano 9K pinout: clk pin 52; S1=4, S2=3 (active-low); LEDs on 10/11/13/14/15/16 (active-low)](../images/tangnano_pinout.svg)
+![Tang Nano 9K pinout: clk pin 52; S1=4, S2=3 (active-low); LEDs on 10/11/13/14/15/16 (active-low)](../images/tangnano_pinout.png)
 
 The board itself (one per student). **Front** — USB-C, the two buttons **S1** and **S2**, and
 the GW1NR FPGA (marked "TANG NANO 9K / SiPEED"):

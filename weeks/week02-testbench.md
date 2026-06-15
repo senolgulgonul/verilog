@@ -65,7 +65,7 @@ ab:cs
 10:00
 11:10
 
-![Half adder waveform (carry high only for AB=11)](../images/wave_halfadder.svg)
+![Half adder waveform (carry high only for AB=11)](../images/wave_halfadder.png)
 ```
 
 (Reading `cs`: the carry is high only for `11`.)
@@ -108,7 +108,7 @@ A B Ci : Co S
 1 1  0 :  1 0
 1 1  1 :  1 1
 
-![Full adder waveform over all 8 input combinations](../images/wave_fulladder.svg)
+![Full adder waveform over all 8 input combinations](../images/wave_fulladder.png)
 ```
 
 ## Example 3 — Testbench for the 2-to-1 MUX

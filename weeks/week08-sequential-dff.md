@@ -63,7 +63,7 @@ endmodule
 On the waveform `Q` follows `D`, but only **at each rising edge** — `Q` is a sampled, delayed
 copy of `D`.
 
-![D flip-flop waveform: Q captures D only on each rising clock edge](../images/wave_dff.svg)
+![D flip-flop waveform: Q captures D only on each rising clock edge](../images/wave_dff.png)
 
 ## Example 2 — 1-bit register with write enable
 

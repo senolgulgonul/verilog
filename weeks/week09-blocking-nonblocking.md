@@ -70,7 +70,7 @@ t=11 b=0 a=0 c=0
 `c` lags `a` by one clock — a **pipeline**. When `b` becomes 1, `a` becomes 1 on the next edge,
 and only on the *following* edge does `c` (which sampled the old `a`) become 1.
 
-![Non-blocking pipeline: b -> a (one clock) -> c (another clock); c lags a](../images/wave_nonblocking.svg)
+![Non-blocking pipeline: b -> a (one clock) -> c (another clock); c lags a](../images/wave_nonblocking.png)
 
 ## Example 2 — Blocking: `a = b; c = a;`
 

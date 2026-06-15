@@ -25,7 +25,7 @@ the same cycle as the input but can glitch; Moore is stable but lags by a cycle.
 > `Y=1` the moment the fourth symbol completes. It is a **Mealy** machine because `Y` depends
 > on being in state `BAB_` **and** seeing input `A`.
 
-![BABA state diagram: IDLE->B_->BA_->BAB_, with A/Y=1 feedback to BA_ (overlap)](../images/fsm_baba_states.svg)
+![BABA state diagram: IDLE->B_->BA_->BAB_, with A/Y=1 feedback to BA_ (overlap)](../images/fsm_baba_states.png)
 
 **`design.v`**
 ```verilog
@@ -101,7 +101,7 @@ A=0 B=0 C=0 D=1 -> Y=0
 `Y=1` appears exactly on the fifth input — the `A` that completes `B-A-B-A` (the leading `A` is
 ignored from `IDLE`).
 
-![BABA Mealy detector: Y=1 on the fifth input (the A completing B-A-B-A)](../images/wave_baba.svg)
+![BABA Mealy detector: Y=1 on the fifth input (the A completing B-A-B-A)](../images/wave_baba.png)
 
 > **Why observe `Y` before the clock edge?** A Mealy output is combinational. The `feed` task
 > applies the input, waits `#1` for logic to settle, prints `Y`, and *then* the next edge

@@ -121,7 +121,7 @@ endmodule
 Program finished. OUT = 5 (expected 5), halted = 1
 MCU TEST PASSED
 ```
-![MCU waveform: state cycles F-D-E; acc 3->5->7->5; out=5 and halted at the end](../images/wave_mcu.svg)
+![MCU waveform: state cycles F-D-E; acc 3->5->7->5; out=5 and halted at the end](../images/wave_mcu.png)
 
 ## Example 3 — on the board
 

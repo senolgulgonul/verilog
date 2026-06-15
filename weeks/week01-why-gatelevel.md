@@ -48,7 +48,7 @@ module halfadder(
 endmodule
 ```
 
-![Half adder: G0 (XOR) drives S, G1 (AND) drives C](../images/halfadder.svg)
+![Half adder: G0 (XOR) drives S, G1 (AND) drives C](../images/halfadder.png)
 
 ## Example 2 — Two AND gates: naming the wire between them
 
@@ -104,7 +104,7 @@ module mux2to1(
 endmodule
 ```
 
-![Gate-level 2-to-1 MUX: G3 NOT, G1/G2 AND, G4 OR, internal wire W1](../images/mux2to1.svg)
+![Gate-level 2-to-1 MUX: G3 NOT, G1/G2 AND, G4 OR, internal wire W1](../images/mux2to1.png)
 
 ## Example 5 — A datasheet circuit: gate-level 2-to-4 decoder
 
@@ -152,7 +152,12 @@ G A1 A0 : Y3 Y2 Y1 Y0
 > "One of Two 2:4 Decoders"). Rather than copy that figure, the gate-level code above is your
 > own redistributable transcription of it — and it is what students actually simulate.
 
-![Gate-level 2-to-4 decoder: two inverters, four enable-gated AND minterms, active-low outputs](../images/decoder.svg)
+![Gate-level 2-to-4 decoder: two inverters, four enable-gated AND minterms, active-low outputs](../images/decoder.png)
+
+Synthesizing this design (VeriSim's **Gates** view) produces the same circuit automatically —
+two inverters for `A0`/`A1`, AND gates gated by the enable `G`, and the active-low output stage:
+
+![Synthesized 2-to-4 decoder: inverters on A0/A1, enable-gated AND/NOR network driving Y0–Y3](../images/decoder_synth.png)
 
 ## Run any of these in VeriSim
 
@@ -176,7 +181,7 @@ endmodule
 
 3. **Run**, read the **Console**, open the **Waveform** (scroll=zoom, drag=pan, click=cursor).
 
-![Half adder waveform: A,B sweep 00->11; S high for 01/10, C high for 11](../images/wave_halfadder.svg)
+![Half adder waveform: A,B sweep 00->11; S high for 01/10, C high for 11](../images/wave_halfadder.png)
 
 ## What to look for
 

@@ -24,7 +24,7 @@ differ from what you expected* but is logically equivalent. Two views:
   decomposed.
 - **RTL** — higher view that keeps modules and shows registers/adders/muxes as blocks.
 
-![Synthesis flow: Verilog RTL -> Yosys -> gate netlist -> FPGA bitstream; lecture stops at the schematic](../images/synthesis_flow.svg)
+![Synthesis flow: Verilog RTL -> Yosys -> gate netlist -> FPGA bitstream; lecture stops at the schematic](../images/synthesis_flow.png)
 
 ## Synthesizable vs simulation-only
 
@@ -84,19 +84,6 @@ endmodule
 ```
 
 Synthesize and read the latch warning. Add `default: y = a;` and the latch disappears.
-
-## (Reference) Yosys to basic cells
-
-The lecture's Yosys script maps a design to a standard-cell library — the same idea VeriSim's
-**Gates** view performs automatically:
-
-```
-read_verilog design.v
-proc;; memory;; fsm;;
-techmap;;
-abc -liberty cmos_cells.lib;;
-write_verilog synth.v
-```
 
 ## Run it in VeriSim
 

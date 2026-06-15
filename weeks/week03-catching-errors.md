@@ -54,7 +54,7 @@ endmodule
 ```
 
 Compare the printed `Co` column with the correct one (Week 2, example 2). The wrong design
-![Full adder waveform: correct Co/S over all 8 cases (compare your DUT against this)](../images/wave_fulladder.svg)
+![Full adder waveform: correct Co/S over all 8 cases (compare your DUT against this)](../images/wave_fulladder.png)
 
 miscomputes the carry for the cases where `Ci=1` and `A,B` differ.
 

@@ -90,7 +90,7 @@ endmodule
 
 Zoom into the `A` transition on the waveform: `Y` briefly leaves 1, then recovers.
 
-![Static-1 hazard: Y should hold 1 when A falls (B=C=1) but glitches low briefly](../images/wave_glitch.svg)
+![Static-1 hazard: Y should hold 1 when A falls (B=C=1) but glitches low briefly](../images/wave_glitch.png)
 
 ## Example 3 — Ripple-carry settling time
 
