@@ -1,7 +1,5 @@
 # Week 4 — Hierarchical Modeling: Module in Module
 
-**Lecture slides:** 80–86, 113 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Real circuits are built from smaller, already-tested blocks. Once your half adder and full

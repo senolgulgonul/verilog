@@ -1,7 +1,5 @@
 # Week 14 — Microcontroller Architecture: Build a Tiny CPU
 
-**Lecture slides:** 244–270 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 The course ends where digital design becomes *programmable*. A CPU is just a well-organized FSM

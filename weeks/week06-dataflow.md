@@ -1,7 +1,5 @@
 # Week 6 — Dataflow Modeling
 
-**Lecture slides:** 106–117 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Writing every gate by hand (Weeks 1–5) is tedious. **Dataflow** modeling describes a circuit

@@ -1,7 +1,5 @@
 # Week 3 — Catching Wrong Designs
 
-**Lecture slides:** 43–48, 69–78 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 A testbench is only useful if it **catches mistakes**. We move from "watch the output" to

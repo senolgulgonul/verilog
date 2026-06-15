@@ -1,7 +1,5 @@
 # Week 5 — Timing in Combinational Circuits: Delay & Glitches
 
-**Lecture slides:** 87–104 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Real gates are not instantaneous. After an input changes, an output settles only after the

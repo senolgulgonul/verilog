@@ -1,7 +1,5 @@
 # Week 8 — Sequential Design: D Flip-Flop, Timescale & Waveforms
 
-**Lecture slides:** 131–136 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Until now outputs depended only on current inputs (combinational). **Sequential** circuits

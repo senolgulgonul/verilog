@@ -1,7 +1,5 @@
 # Week 10 — Synthesis: From Describing to Designing
 
-**Lecture slides:** 143–160 · **Sessions:** 2 × 45 min
-
 ## The historical idea (the turning point)
 
 So far Verilog has done what it was *invented* to do: **describe** a hand-designed circuit and

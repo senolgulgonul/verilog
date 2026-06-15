@@ -1,7 +1,5 @@
 # Week 1 — Why Verilog, and Gate-Level Modeling
 
-**Lecture slides:** 10–28 · **Sessions:** 2 × 45 min (worked examples in session 1, exercises in session 2)
-
 ## The historical idea (why this comes first)
 
 Verilog was created (by **Philip Moorby**, 1984) to *verify logic* — to test circuits that

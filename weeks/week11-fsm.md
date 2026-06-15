@@ -1,7 +1,5 @@
 # Week 11 — Finite State Machines: Mealy, Moore, Pattern Detection
 
-**Lecture slides:** 161–172 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Sequential building blocks (Weeks 8–9) plus combinational next-state logic (Weeks 6–7) combine

@@ -1,7 +1,5 @@
 # Week 2 — Testbenches: How Do We Test the Circuit We Described?
 
-**Lecture slides:** 29–48 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 We *described* a circuit last week. Verilog's reason for existing is the next question: **how

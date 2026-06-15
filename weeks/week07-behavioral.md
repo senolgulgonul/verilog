@@ -1,7 +1,5 @@
 # Week 7 — Behavioral Modeling (Combinational)
 
-**Lecture slides:** 120–129 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 The highest-level combinational style: describe *what* the circuit does with procedural

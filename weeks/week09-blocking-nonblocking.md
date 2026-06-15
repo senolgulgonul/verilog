@@ -1,7 +1,5 @@
 # Week 9 — Blocking vs Non-Blocking Assignments
 
-**Lecture slides:** 137–141 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Now that we have clocks, the *kind* of assignment inside an `always` block changes the
