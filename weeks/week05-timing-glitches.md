@@ -26,6 +26,7 @@ Give each gate a delay and watch the outputs settle.
 
 **`design.v`**
 ```verilog
+`timescale 1ns/1ns
 module fulladder(output S, Co, input A, B, Ci);
     wire W1, W2, W3;
     xor #(2) G0 (W1, A, B);
@@ -56,6 +57,12 @@ endmodule
 On the waveform, `S` and `Co` update a few ns *after* the inputs — the propagation delay made
 visible. Set all delays to `#0` and the lag disappears (and so do glitches — which is the trap).
 
+> **Delays need a `` `timescale ``.** A gate delay like `#2` is written in *time units*, so every
+> file that uses delays must declare a `` `timescale ``. Here it is `` `timescale 1ns/1ns ``, so
+> `#2` means 2 ns. Put `` `timescale 1ns/1ns `` at the top of **both** `design.v` **and**
+> `testbench.v`. If the design file omits it, the delays don't take effect — the outputs read `x`
+> and the simulator warns about mixing default and `` `timescale `` delays.
+
 ## Example 2 — A static hazard (glitch)
 
 Classic hazard: `Y = (A & B) | (~A & C)`. When `A` changes while `B = C = 1`, `Y` should stay
@@ -63,6 +70,7 @@ Classic hazard: `Y = (A & B) | (~A & C)`. When `A` changes while `B = C = 1`, `Y
 
 **`design.v`**
 ```verilog
+`timescale 1ns/1ns
 module hazard(output Y, input A, B, C);
     wire W1, W2, W3;
     not #(2) G0 (W1, A);      // ~A is delayed
@@ -96,7 +104,7 @@ Zoom into the `A` transition on the waveform: `Y` briefly leaves 1, then recover
 
 Use the delayed full adder inside the 4-bit adder and force the carry across all stages.
 
-**`design.v`** — `fulladder` (delayed, example 1) + `fourbitadder` (Week 4 structure).
+**`design.v`** — `` `timescale 1ns/1ns `` + `fulladder` (delayed, from Example 1) + `fourbitadder` (Week 4 structure).
 
 **`testbench.v`**
 ```verilog
