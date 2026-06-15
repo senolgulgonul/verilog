@@ -2,7 +2,7 @@
 # Builds this repo into a website at:  https://<username>.github.io/<repo-name>/
 
 title: "EEE 303 — Digital System Design (VeriSim)"
-description: "A 14-week Verilog HDL course with the browser-based VeriSim simulator and the Tang Nano 9K FPGA. Şenol Gülgönül, Ostim Technical University."
+description: "A 14-week Verilog HDL course with the browser-based VeriSim simulator and the Tang Nano 9K FPGA. Şenol Gülgönül."
 theme: jekyll-theme-cayman
 
 # README.md is used as the site home page.

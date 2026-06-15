@@ -4,7 +4,7 @@ A **14-week** courseware for learning **Verilog HDL** with
 [**VeriSim**](https://senolgulgonul.github.io/verisim/) (Icarus Verilog + Yosys in the
 browser), then implementing on the **Tang Nano 9K** FPGA.
 
-> **Şenol Gülgönül**, Assist. Prof. Dr. — Ostim Technical University
+> **Şenol Gülgönül**, Assist. Prof. Dr.
 > Electrical & Electronics Engineering · Digital System Design
 
 The course follows the **historical path of Verilog**:
@@ -59,33 +59,33 @@ No dump call -> empty Waveform tab (Console still works).
 
 ### Part A — Combinational: describe and test (Weeks 1-7)
 
-| Week | Topic | Slides |
-|---|---|---|
-| [1](weeks/week01-why-gatelevel.md) | Why Verilog; **gate-level modeling** — primitives, transcribing a circuit diagram | 10-28 |
-| [2](weeks/week02-testbench.md) | **Testbenches** — instantiation, stimulus, `$display`/`$monitor`/`$dumpfile`/`$finish` | 29-48 |
-| [3](weeks/week03-catching-errors.md) | **Catching wrong designs** — manual truth-table check, self-checking TB, test vectors | 43-48, 69-78 |
-| [4](weeks/week04-hierarchy.md) | **Hierarchical modeling** — module-in-module, full adder, 4-bit adder | 80-86, 113 |
-| [5](weeks/week05-timing-glitches.md) | **Timing** — propagation delay, rise/fall, **glitches & hazards** | 87-104 |
-| [6](weeks/week06-dataflow.md) | **Dataflow modeling** — `assign`, bitwise / arithmetic / conditional operators, UDP | 106-117 |
-| [7](weeks/week07-behavioral.md) | **Behavioral (combinational)** — `always @*`, `if-else`, `case`, vectors, binary numbers | 120-129 |
+| Week | Topic |
+|---|---|
+| [1](weeks/week01-why-gatelevel.md) | Why Verilog; **gate-level modeling** — primitives, transcribing a circuit diagram |
+| [2](weeks/week02-testbench.md) | **Testbenches** — instantiation, stimulus, `$display`/`$monitor`/`$dumpfile`/`$finish` |
+| [3](weeks/week03-catching-errors.md) | **Catching wrong designs** — manual truth-table check, self-checking TB, test vectors |
+| [4](weeks/week04-hierarchy.md) | **Hierarchical modeling** — module-in-module, full adder, 4-bit adder |
+| [5](weeks/week05-timing-glitches.md) | **Timing** — propagation delay, rise/fall, **glitches & hazards** |
+| [6](weeks/week06-dataflow.md) | **Dataflow modeling** — `assign`, bitwise / arithmetic / conditional operators, UDP |
+| [7](weeks/week07-behavioral.md) | **Behavioral (combinational)** — `always @*`, `if-else`, `case`, vectors, binary numbers |
 | — | **MIDTERM** — combinational complete | — |
 
 ### Part B — Sequential, synthesis, FSM (Weeks 8-11)
 
-| Week | Topic | Slides |
-|---|---|---|
-| [8](weeks/week08-sequential-dff.md) | **Sequential design** — D flip-flop, registers; **timescale & waveforms** matter now | 131-136 |
-| [9](weeks/week09-blocking-nonblocking.md) | **Blocking vs non-blocking** assignment | 137-141 |
-| [10](weeks/week10-synthesis.md) | **Synthesis** — describe -> design; the synthesized schematic; what is/ isn't synthesizable | 143-160 |
-| [11](weeks/week11-fsm.md) | **Finite state machines** — Mealy/Moore, pattern detection | 161-172 |
+| Week | Topic |
+|---|---|
+| [8](weeks/week08-sequential-dff.md) | **Sequential design** — D flip-flop, registers; **timescale & waveforms** matter now |
+| [9](weeks/week09-blocking-nonblocking.md) | **Blocking vs non-blocking** assignment |
+| [10](weeks/week10-synthesis.md) | **Synthesis** — describe -> design; the synthesized schematic; what is/ isn't synthesizable |
+| [11](weeks/week11-fsm.md) | **Finite state machines** — Mealy/Moore, pattern detection |
 
 ### Part C — FPGA and a tiny CPU (Weeks 12-14)
 
-| Week | Topic | Slides |
-|---|---|---|
-| [12](weeks/week12-fpga-board.md) | **FPGA & Tang Nano 9K** — three uses of Verilog, peripherals, the Gowin IDE flow | 184-208 |
-| [13](weeks/week13-fpga-examples.md) | **On-board examples** — gate/dataflow/behavioral, memory, FSM, UART-TX; using an IP core (rPLL) | 209-242 |
-| [14](weeks/week14-mcu.md) | **Microcontroller architecture** — a simple 4-bit MCU, fetch-decode-execute; brief RISC-V | 244-270 |
+| Week | Topic |
+|---|---|
+| [12](weeks/week12-fpga-board.md) | **FPGA & Tang Nano 9K** — three uses of Verilog, peripherals, the Gowin IDE flow |
+| [13](weeks/week13-fpga-examples.md) | **On-board examples** — gate/dataflow/behavioral, memory, FSM, UART-TX; using an IP core (rPLL) |
+| [14](weeks/week14-mcu.md) | **Microcontroller architecture** — a simple 4-bit MCU, fetch-decode-execute; brief RISC-V |
 | — | **FINAL** | — |
 
 ### Reference
