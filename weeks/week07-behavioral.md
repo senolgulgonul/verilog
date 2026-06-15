@@ -100,9 +100,9 @@ Time=0 sel=00 a=0 b=1 c=1 d=1 y=0
 Time=10 sel=01 a=0 b=1 c=1 d=1 y=1
 Time=20 sel=10 a=0 b=1 c=1 d=1 y=1
 Time=30 sel=11 a=0 b=1 c=1 d=1 y=1
-
-![mux4to1 waveform: y follows the selected input as sel steps 00->11](../images/wave_mux4to1.png)
 ```
+
+![mux4to1 waveform: y follows the selected input as sel steps 00->11](/images/wave_mux4to1.png)
 
 ## Example 4 — case with number literals (exam style)
 
