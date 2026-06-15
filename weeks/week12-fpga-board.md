@@ -1,7 +1,5 @@
 # Week 12 — FPGA & the Tang Nano 9K: The Third Use of Verilog
 
-**Lecture slides:** 184–208 · **Sessions:** 2 × 45 min
-
 ## The historical idea — three uses of Verilog
 
 1. **Describe & simulate** a hand-designed circuit (Weeks 1–9, 11).
@@ -162,6 +160,49 @@ endmodule
 ```
 
 (Constraints: `s1` on 4; `leds[0..5]` on 10/11/13/14/15/16 — see the reference file.)
+
+## Testbenches — simulate before the board
+
+The same habit as the rest of the course: simulate first, confirm the truth table, *then*
+program the chip and compare. Remember LEDs and buttons are **active-low**, so in simulation
+`led = 0` means "lit" and a pressed button is `0`.
+
+**Testbench for Examples 1–3** (`and_demo`, `half_adder_board`, `ifelse_demo`)
+```verilog
+`timescale 1ns/1ns
+module tb;
+    reg s1, s2;
+    wire led_and;
+    wire [1:0] led_ha;
+    wire [5:0] led_if;
+    and_demo        A(.s1(s1), .s2(s2), .led(led_and));
+    half_adder_board H(.s1(s1), .s2(s2), .led(led_ha));
+    ifelse_demo     I(.s1(s1), .leds(led_if));
+    initial begin
+        $dumpfile("dump.vcd"); $dumpvars(0, tb);
+        $display("s1 s2 | and  ha(c,s) ifelse");
+        s1=1; s2=1; #1 $display(" %b  %b |  %b    %b   %b", s1,s2,led_and,led_ha,led_if);
+        s1=1; s2=0; #1 $display(" %b  %b |  %b    %b   %b", s1,s2,led_and,led_ha,led_if);
+        s1=0; s2=1; #1 $display(" %b  %b |  %b    %b   %b", s1,s2,led_and,led_ha,led_if);
+        s1=0; s2=0; #1 $display(" %b  %b |  %b    %b   %b", s1,s2,led_and,led_ha,led_if);
+        $finish;
+    end
+endmodule
+```
+
+**Expected Console** (verified in Icarus; `led=0` = lit)
+```
+s1 s2 | and  ha(c,s) ifelse
+ 1  1 |  1    11   101010
+ 1  0 |  1    10   101010
+ 0  1 |  1    10   010101
+ 0  0 |  0    01   010101
+```
+
+`and_demo` lights LED0 only when **both** buttons are pressed (`s1=s2=0` → `led=0`).
+`half_adder_board` shows the sum/carry of the two pressed buttons. `ifelse_demo` ignores `s2` —
+its pattern flips only with `s1`. Compare each row to the board: press the buttons and confirm
+the same LEDs light.
 
 ## Verify in VeriSim, then build
 

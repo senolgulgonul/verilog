@@ -1,7 +1,5 @@
 # Week 13 — On-Board Examples: From Gate Level to UART, and Using an IP Core
 
-**Lecture slides:** 209–242 · **Sessions:** 2 × 45 min
-
 ## The historical idea
 
 Everything you simulated now runs on silicon, in the order you learned it: gate/dataflow/
@@ -39,9 +37,10 @@ endmodule
 
 **`design.v`**
 ```verilog
-module blink(input clk, output reg led);
-    localparam WAIT = 2_700_000;      // ~10 toggles/sec from 27 MHz
+module blink #(parameter WAIT = 2_700_000)   // scale down for simulation (e.g. WAIT=2)
+(input clk, output reg led);
     reg [31:0] counter = 0;
+    initial led = 0;
     always @(posedge clk) begin
         if (counter == WAIT) begin counter <= 0; led <= ~led; end
         else                       counter <= counter + 1;
@@ -57,8 +56,7 @@ endmodule
 
 **`design.v`**
 ```verilog
-module counter_leds(input clk, output [5:0] leds);
-    localparam TICK = 2_700_000;
+module counter_leds #(parameter TICK = 2_700_000)(input clk, output [5:0] leds);
     reg [31:0] div = 0; reg [5:0] count = 0;
     always @(posedge clk)
         if (div == TICK) begin div <= 0; count <= count + 1'b1; end
@@ -66,8 +64,7 @@ module counter_leds(input clk, output [5:0] leds);
     assign leds = ~count;             // active-low count display
 endmodule
 
-module shift_leds(input clk, output [5:0] leds);
-    localparam TICK = 5_000_000;
+module shift_leds #(parameter TICK = 5_000_000)(input clk, output [5:0] leds);
     reg [31:0] div = 0; reg [5:0] walk = 6'b000001;
     always @(posedge clk)
         if (div == TICK) begin div <= 0; walk <= {walk[4:0], walk[5]}; end
@@ -165,6 +162,76 @@ and does **not** simulate in VeriSim. Verify logic with a divider; swap in the P
   divider and "works on the board" with a huge one is *the same design*.
 - **UART framing on the waveform**: idle-high, one start-bit dip, eight LSB-first data bits,
   stop bit. Debug framing in the browser, not with a scope.
+
+## Testbenches — simulate before the board
+
+Simulate each design in VeriSim first, confirm the behaviour, then program the board and
+compare. For the clock-divided designs (`blink`, `counter_leds`, `shift_leds`), the divider is
+a **parameter** — set it tiny in simulation (e.g. `WAIT=2`) so the waveform is short, then use
+the real value on hardware. Same logic, scaled clock.
+
+**Behavioural / clocked examples** (`case_demo`, `blink`, `rom_demo`)
+```verilog
+`timescale 1ns/1ns
+module tb;
+    reg clk = 0; always #5 clk = ~clk;
+    // case_demo (combinational)
+    reg s1, s2; wire [5:0] led_case;
+    case_demo C(.s1(s1), .s2(s2), .leds(led_case));
+    // blink with the divider scaled down to WAIT=2
+    wire blink_led; blink #(.WAIT(2)) B(.clk(clk), .led(blink_led));
+    // rom_demo
+    reg [2:0] addr; wire [5:0] rom_leds; rom_demo R(.clk(clk), .addr(addr), .leds(rom_leds));
+    integer i;
+    initial begin
+        $dumpfile("dump.vcd"); $dumpvars(0, tb);
+        $display("-- case_demo: sel = {~s1,~s2} --");
+        s1=1; s2=1; #1 $display("sel=00 leds=%b", led_case);
+        s1=1; s2=0; #1 $display("sel=01 leds=%b", led_case);
+        s1=0; s2=1; #1 $display("sel=10 leds=%b", led_case);
+        s1=0; s2=0; #1 $display("sel=11 leds=%b", led_case);
+        $display("-- blink (WAIT=2): toggles every 3 clocks --");
+        repeat (9) begin @(posedge clk); #1 $display("t=%0t blink_led=%b", $time, blink_led); end
+        $display("-- rom_demo: address sweep --");
+        for (i=0;i<8;i=i+1) begin addr=i; @(posedge clk); #1
+            $display("addr=%0d leds=%b", addr, rom_leds); end
+        $finish;
+    end
+endmodule
+```
+
+**FSM and UART** (`fsm_board`, `uart_tx`)
+```verilog
+`timescale 1ns/1ns
+module tb;
+    reg clk = 0; always #5 clk = ~clk;
+    // fsm_board: button3 press(0)/release(1) sequence, button4=1 (no reset)
+    reg b3 = 1, b4 = 1; wire [5:0] led;
+    fsm_board F(.clk(clk), .button3(b3), .button4(b4), .led(led));
+    // uart_tx with the baud divider scaled to DIV=2, send 0x41 ('A')
+    reg start = 0; reg [7:0] data = 8'h41; wire tx, busy;
+    uart_tx #(.DIV(2)) U(.clk(clk), .start(start), .data(data), .tx(tx), .busy(busy));
+    integer k;
+    task press(input v3); begin b3=v3; @(posedge clk); #1
+        $display("b3=%b -> led=%b", b3, led); end endtask
+    initial begin
+        $dumpfile("dump.vcd"); $dumpvars(0, tb);
+        $display("-- FSM: press,release,press,release -> S4 (led=110111) --");
+        @(posedge clk); #1 $display("init    led=%b", led);
+        press(0); press(1); press(0); press(1); press(1);
+        $display("-- UART 0x41: start 0, data LSB-first 1000 0010, stop 1 --");
+        @(negedge clk) start=1; @(posedge clk); @(negedge clk) start=0;
+        for (k=0;k<11;k=k+1) begin repeat (2) @(posedge clk); #1
+            $display("bit %0d: tx=%b busy=%b", k, tx, busy); end
+        $finish;
+    end
+endmodule
+```
+
+**Expected (verified in Icarus):** `case_demo` lights one LED per button combination; `blink`
+toggles every 3 clocks; `rom_demo` shows `~mem[addr]`. The FSM walks `111111 → 111110 → 111101
+→ 111011 → 110111` as you press/release. The UART `tx` line emits `0` (start), then `0x41`
+LSB-first (`1,0,0,0,0,0,1,0`), then `1` (stop) — decode it on a logic analyzer and compare.
 
 ## Exercises (session 2)
 
