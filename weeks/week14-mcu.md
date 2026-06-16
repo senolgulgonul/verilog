@@ -1,3 +1,9 @@
+<style>
+/* Cap long code listings (design.v / testbench.v etc.) at ~20 lines; scroll for the rest.
+   Adjust the 31em to show more/fewer lines. */
+#content pre { line-height: 1.45; max-height: 31em; overflow: auto; }
+</style>
+
 # Week 14 — Microcontroller Architecture: Build a Tiny CPU
 
 ## The historical idea
@@ -5,7 +11,8 @@
 The course ends where digital design becomes *programmable*. A CPU is just a well-organized FSM
 (Week 11) wired to memory (Week 13) and an ALU (Week 6). We use **AVR** as the reference
 (students met it via Arduino), then build a minimal **4-bit MCU** that runs a tiny program
-through **fetch → decode → execute**. RISC-V is introduced only briefly.
+through **fetch → decode → execute**, see the *same* program run on a real AVR, and finish with
+a working single-cycle **RISC-V (RV32I)** core.
 
 ## Objectives
 
@@ -13,7 +20,7 @@ through **fetch → decode → execute**. RISC-V is introduced only briefly.
 - Describe **fetch → decode → execute** as a three-state FSM.
 - Build a 4-bit accumulator MCU: ROM, ALU, registers, output.
 - Run `LDA 3, LDB 2, ADD, ADD, SUB, STS` → **5** (3+2+2−2).
-- Know what RISC-V is and why we stop here.
+- Run the same program on a real **AVR**, then on a single-cycle **RISC-V (RV32I)** core.
 
 ## Concept (short)
 
@@ -50,7 +57,12 @@ endmodule
 
 ## Example 2 — the whole 4-bit MCU
 
-Verified in Icarus: produces OUT = 5, then halts.
+Verified in Icarus: produces OUT = 5, then halts. Here is the same machine drawn as a schematic,
+built in **Digital** (Helmut Neemann): the ROM and program counter feed the instruction bus, the
+two registers hold `ACC` and `B`, the ALU does add/sub, and the result is latched to the output
+and RAM — every block one you built in earlier weeks.
+
+![4-bit MCU schematic built in Digital: program counter and ROM drive an instruction bus into two registers (ACC and B) and an ALU; the ALU result is written back to a register and to RAM, clocked from a single clock](../images/EEE303_MCU.png)
 
 **`design.v`**
 ```verilog
@@ -151,13 +163,301 @@ endmodule
 3. **Synthesize → RTL**: identify the ROM, the PC register, the ALU adder, and the state
    register — the CPU as the blocks you already know.
 
-## A note on RISC-V
+## It's real: the same program in Arduino assembly
 
-**RISC-V** is an open-standard instruction set architecture — anyone may implement it without a
-license, which is why it matters industrially. A real core needs 32-bit instructions, a register
-file, and a much larger decoder than our toy. We stop at awareness: our MCU shows *the
-principle* (fetch/decode/execute over an ISA); RISC-V is the same idea at production scale and a
-natural follow-on or project.
+The toy MCU is not a cartoon. The **AVR** chip on an Arduino Uno or Nano runs the *same kind* of
+program — `fetch → decode → execute` over its own ISA — and you can write that assembly by hand
+from inside an ordinary sketch, then read the answer back over the serial monitor.
+
+Here is our 4-bit MCU program — `LDA 3, LDB 2, ADD, ADD, SUB, STS` → **5** (3 + 2 + 2 − 2) —
+rewritten as **AVR inline assembly**. The mnemonics line up almost one-to-one with our toy
+opcodes (`LDA`/`LDB` → `ldi`, `ADD` → `add`, `SUB` → `sub`, `STS` → `sts`):
+
+```cpp
+// Arduino sketch — the 4-bit MCU program on a real AVR (Uno / Nano)
+// Senol Gulgonul
+volatile byte a = 0;
+
+void setup() {
+  Serial.begin(9600);
+  asm volatile (
+    "ldi r26, 3      \n"   // LDA 3 : ACC = 3
+    "ldi r27, 2      \n"   // LDB 2 : B   = 2
+    "add r26, r27    \n"   // ADD   : ACC = 3 + 2 = 5
+    "add r26, r27    \n"   // ADD   : ACC = 5 + 2 = 7
+    "sub r26, r27    \n"   // SUB   : ACC = 7 - 2 = 5
+    "sts a, r26      \n"   // STS   : a = ACC = 5
+    : : : "r26", "r27"      // tell the compiler these registers were used
+  );
+  Serial.print("a = ");
+  Serial.println(a);        // Serial Monitor prints:  a = 5
+}
+
+void loop() { }
+```
+
+Flash it, open the **Serial Monitor at 9600 baud**, and you see `a = 5` — the exact result your
+4-bit `mcu4` produced in VeriSim. Same idea, real silicon.
+
+## RISC-V
+
+Our 4-bit MCU shows the *principle*. **RISC-V** is that same principle at industrial scale: an
+**open-standard instruction set architecture (ISA)** that anyone may implement free of license
+fees — which is why it now appears in microcontrollers, phones, and datacenter chips. The
+specifications are published openly at [riscv.org](https://riscv.org/), with the full ISA manuals
+under [riscv.org/technical/specifications](https://riscv.org/technical/specifications/).
+
+The base 32-bit integer ISA, **RV32I**, keeps the same `fetch → decode → execute` loop you just
+built, but with 32-bit instructions, **32 general-purpose registers** (`x0`–`x31`, where `x0` is
+hardwired to 0), and a wider decoder that recognises arithmetic, branch, jump, and load/store
+formats. The diagram below is a **single-cycle** RV32I datapath — one instruction per clock —
+which is exactly what the `design.v` further down implements:
+
+![Single-cycle RV32I datapath: the program counter feeds the instruction memory, which drives the register file and an immediate generator into the ALU; data memory and a write-back multiplexer return the result to the register file, while a separate adder computes branch and jal targets for the next program counter](../images/riscv_datapath.svg)
+
+Just like the `rom[]` in our 4-bit MCU, we embed the program directly as machine code — so this
+real (subset) RV32I core runs in VeriSim with **no toolchain**. It computes
+`sum = 1 + 2 + … + 10 = 55` with a genuine loop (`addi`, `add`, `beq`, `jal`) and stores the
+result to data memory.
+
+**`design.v`**
+```verilog
+// =====================================================================
+//  design.v  -  Single-cycle RV32I (subset) educational RISC-V core
+//
+//  Synthesizable core only.  Pair with testbench.v in VeriSim.
+//  The instruction program is embedded inline (no $readmemh, no
+//  firmware, no toolchain).  Validated with Icarus Verilog 12.
+//
+//  Embedded program computes  sum = 1 + 2 + ... + 10 = 55,
+//  then stores it to data memory address 0.
+//
+//  Supported instructions:
+//    LUI, ADDI, ADD, SUB, AND, OR, XOR, SLL, SRL, SLT, SLTU,
+//    BEQ, BNE, BLT, JAL, LW, SW
+// =====================================================================
+
+// ---------------------------------------------------------------------
+//  Register file: 32 x 32-bit, x0 hardwired to 0
+// ---------------------------------------------------------------------
+module regfile(
+    input             clk,
+    input      [4:0]  rs1, rs2, rd,
+    input             we,
+    input      [31:0] wd,
+    output     [31:0] rd1, rd2
+);
+    reg [31:0] r [0:31];
+    integer k;
+    initial for (k = 0; k < 32; k = k + 1) r[k] = 32'b0;
+
+    assign rd1 = (rs1 == 5'd0) ? 32'b0 : r[rs1];
+    assign rd2 = (rs2 == 5'd0) ? 32'b0 : r[rs2];
+
+    always @(posedge clk)
+        if (we && rd != 5'd0) r[rd] <= wd;
+endmodule
+
+// ---------------------------------------------------------------------
+//  CPU core
+// ---------------------------------------------------------------------
+module cpu(
+    input             clk,
+    input             rst,
+    output reg [31:0] pc,
+    output     [31:0] dmem0     // expose data memory word 0 for checking
+);
+    // ---- instruction memory (word addressed) ----
+    reg [31:0] imem [0:63];
+    integer i;
+    initial begin
+        for (i = 0; i < 64; i = i + 1) imem[i] = 32'h00000013; // NOP (addi x0,x0,0)
+        imem[0] = 32'h00000093;   // addi x1, x0, 0     ; sum = 0
+        imem[1] = 32'h00100113;   // addi x2, x0, 1     ; i = 1
+        imem[2] = 32'h00b00193;   // addi x3, x0, 11    ; limit = 11
+        imem[3] = 32'h00310863;   // beq  x2, x3, done
+        imem[4] = 32'h002080b3;   // add  x1, x1, x2    ; sum += i
+        imem[5] = 32'h00110113;   // addi x2, x2, 1     ; i++
+        imem[6] = 32'hff5ff06f;   // jal  x0, loop
+        imem[7] = 32'h00102023;   // sw   x1, 0(x0)     ; done: store sum
+        imem[8] = 32'h0000006f;   // jal  x0, 0         ; halt (self loop)
+    end
+
+    // ---- data memory ----
+    reg [31:0] dmem [0:63];
+    initial for (i = 0; i < 64; i = i + 1) dmem[i] = 32'b0;
+    assign dmem0 = dmem[0];
+
+    // ---- fetch ----
+    wire [31:0] instr = imem[pc[31:2]];
+
+    // ---- decode fields ----
+    wire [6:0] opcode = instr[6:0];
+    wire [4:0] rd     = instr[11:7];
+    wire [2:0] f3     = instr[14:12];
+    wire [4:0] rs1    = instr[19:15];
+    wire [4:0] rs2    = instr[24:20];
+    wire [6:0] f7     = instr[31:25];
+
+    // ---- immediates ----
+    wire [31:0] immI = {{20{instr[31]}}, instr[31:20]};
+    wire [31:0] immS = {{20{instr[31]}}, instr[31:25], instr[11:7]};
+    wire [31:0] immB = {{19{instr[31]}}, instr[31], instr[7],
+                        instr[30:25], instr[11:8], 1'b0};
+    wire [31:0] immU = {instr[31:12], 12'b0};
+    wire [31:0] immJ = {{11{instr[31]}}, instr[31], instr[19:12],
+                        instr[20], instr[30:21], 1'b0};
+
+    // ---- register file ----
+    wire [31:0] rdata1, rdata2;
+    reg         regwrite;
+    reg  [31:0] wdata;
+    regfile RF(.clk(clk), .rs1(rs1), .rs2(rs2), .rd(rd),
+               .we(regwrite), .wd(wdata), .rd1(rdata1), .rd2(rdata2));
+
+    // ---- ALU result (combinational) ----
+    reg  [31:0] alu;
+    always @(*) begin
+        case (opcode)
+            7'b0010011: begin // I-type ALU (addi etc.)
+                case (f3)
+                    3'b000: alu = rdata1 + immI;                       // addi
+                    3'b111: alu = rdata1 & immI;                       // andi
+                    3'b110: alu = rdata1 | immI;                       // ori
+                    3'b100: alu = rdata1 ^ immI;                       // xori
+                    3'b001: alu = rdata1 << immI[4:0];                 // slli
+                    3'b101: alu = rdata1 >> immI[4:0];                 // srli
+                    3'b010: alu = ($signed(rdata1) < $signed(immI)) ? 32'd1 : 32'd0; // slti
+                    3'b011: alu = (rdata1 < immI) ? 32'd1 : 32'd0;     // sltiu
+                    default: alu = 32'b0;
+                endcase
+            end
+            7'b0110011: begin // R-type
+                case (f3)
+                    3'b000: alu = (f7[5]) ? (rdata1 - rdata2) : (rdata1 + rdata2); // sub/add
+                    3'b111: alu = rdata1 & rdata2;                     // and
+                    3'b110: alu = rdata1 | rdata2;                     // or
+                    3'b100: alu = rdata1 ^ rdata2;                     // xor
+                    3'b001: alu = rdata1 << rdata2[4:0];               // sll
+                    3'b101: alu = rdata1 >> rdata2[4:0];               // srl
+                    3'b010: alu = ($signed(rdata1) < $signed(rdata2)) ? 32'd1 : 32'd0; // slt
+                    3'b011: alu = (rdata1 < rdata2) ? 32'd1 : 32'd0;   // sltu
+                    default: alu = 32'b0;
+                endcase
+            end
+            7'b0110111: alu = immU;                 // lui
+            7'b0000011: alu = rdata1 + immI;        // lw  (address)
+            7'b0100011: alu = rdata1 + immS;        // sw  (address)
+            default:    alu = 32'b0;
+        endcase
+    end
+
+    // ---- branch decision ----
+    reg branch_taken;
+    always @(*) begin
+        branch_taken = 1'b0;
+        if (opcode == 7'b1100011) begin
+            case (f3)
+                3'b000: branch_taken = (rdata1 == rdata2);                 // beq
+                3'b001: branch_taken = (rdata1 != rdata2);                 // bne
+                3'b100: branch_taken = ($signed(rdata1) < $signed(rdata2));// blt
+                default: branch_taken = 1'b0;
+            endcase
+        end
+    end
+
+    // ---- write-back source select ----
+    always @(*) begin
+        regwrite = 1'b0;
+        wdata    = 32'b0;
+        case (opcode)
+            7'b0010011, 7'b0110011, 7'b0110111: begin regwrite = 1'b1; wdata = alu;        end // ALU / lui
+            7'b0000011:                         begin regwrite = 1'b1; wdata = dmem[alu[31:2]]; end // lw
+            7'b1101111:                         begin regwrite = 1'b1; wdata = pc + 32'd4;  end // jal -> rd
+            default: ;
+        endcase
+    end
+
+    // ---- next PC + sequential state ----
+    always @(posedge clk) begin
+        if (rst) begin
+            pc <= 32'b0;
+        end else begin
+            if (opcode == 7'b0100011)            // sw
+                dmem[alu[31:2]] <= rdata2;
+
+            if (opcode == 7'b1101111)            // jal
+                pc <= pc + immJ;
+            else if (branch_taken)               // taken branch
+                pc <= pc + immB;
+            else
+                pc <= pc + 32'd4;
+        end
+    end
+endmodule
+```
+
+**`testbench.v`**
+```verilog
+// =====================================================================
+//  testbench.v  -  Self-checking testbench for the RV32I core
+//
+//  Top module for VeriSim.  Drives clock + reset, runs the embedded
+//  program, and prints PASS/FAIL by checking data memory word 0.
+// =====================================================================
+
+module tb;
+    reg clk = 0, rst = 1;
+    wire [31:0] pc, dmem0;
+
+    cpu DUT(.clk(clk), .rst(rst), .pc(pc), .dmem0(dmem0));
+
+    always #5 clk = ~clk;          // 100 MHz-ish
+
+    integer cyc;
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb);
+
+        // hold reset across the first clock edge, then release
+        rst = 1; #12; rst = 0;
+
+        // run enough cycles for the loop to finish and store
+        for (cyc = 0; cyc < 60; cyc = cyc + 1) @(posedge clk);
+
+        $display("------------------------------------------");
+        $display("dmem[0] (sum 1..10) = %0d", dmem0);
+        if (dmem0 === 32'd55)
+            $display("RESULT: PASS  (expected 55)");
+        else
+            $display("RESULT: FAIL  (expected 55, got %0d)", dmem0);
+        $display("------------------------------------------");
+        $finish;
+    end
+endmodule
+```
+
+**Expected Console**
+```
+------------------------------------------
+dmem[0] (sum 1..10) = 55
+RESULT: PASS  (expected 55)
+------------------------------------------
+```
+
+![RISC-V waveform in VeriSim: the program counter steps 0x0, 0x4, 0x8, then loops 0xc, 0x10, 0x14, 0x18 repeatedly as the instruction word cycles through the encoded program before the final store](../images/wave_riscv.png)
+
+The waveform shows the loop body running: `pc` walks `0xc → 0x10 → 0x14 → 0x18` and jumps back to
+`0xc` ten times while `instr` cycles through the encoded words, leaving **55** in data memory at
+the end.
+
+This is where the course points next. The same three steps you have used all term — **describe,
+simulate, synthesize** — scale directly from a 4-bit toy to a production ISA. RV32I makes a
+natural capstone: extend the core with more `lw`/`sw` exercises, add instructions from the
+[RISC-V specifications](https://riscv.org/technical/specifications/), or target the Tang Nano 9K.
+
+(Subset implemented: `LUI, ADDI, ADD, SUB, AND, OR, XOR, SLL, SRL, SLT, SLTU, BEQ, BNE, BLT, JAL,
+LW, SW`. Single-cycle for clarity; pipelining and CSR/privilege come later.)
 
 ## Exercises (session 2)
 
