@@ -215,6 +215,7 @@ real (subset) RV32I core runs in VeriSim with **no toolchain**. It computes
 result to data memory.
 
 **`design.v`**
+{% raw %}
 ```verilog
 // Single-cycle RV32I (subset). The program is embedded inline (no $readmemh,
 // no firmware), so it runs in VeriSim with no toolchain. Pair with testbench.v.
@@ -365,6 +366,7 @@ module cpu(
     end
 endmodule
 ```
+{% endraw %}
 
 **`testbench.v`**
 ```verilog
