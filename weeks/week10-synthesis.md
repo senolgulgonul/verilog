@@ -26,6 +26,13 @@ differ from what you expected* but is logically equivalent. Two views:
 
 ![Synthesis flow: Verilog RTL -> Yosys -> gate netlist -> FPGA bitstream; lecture stops at the schematic](../images/synthesis_flow.png)
 
+A concrete **Gates** view — the behavioral 4-to-1 mux from Week 7 (a `case` on `sel`) after
+synthesis: `sel` drives inverters, each data input `a`/`b`/`c`/`d` passes through an AND gate
+enabled by the decoded select lines, and an OR gate combines them into `y`. The `case` you wrote
+is now pure AND/OR/NOT — logically identical, just lowered to primitives.
+
+![Synthesized 4-to-1 mux (Gates view): sel inverted, one AND per data input, results OR-combined into y](../images/synth_mux4to1.png)
+
 ## Synthesizable vs simulation-only
 
 | Synthesizable (becomes hardware) | Simulation-only |
@@ -67,6 +74,8 @@ endmodule
 
 **Synthesize → RTL** shows a single D flip-flop cell. Add a stray `initial Q = 0;` and note it
 is a power-up value on an FPGA, not logic — it creates no gate.
+
+![Synthesized D flip-flop (RTL view): D and CLK enter one flip-flop cell, output Q](../images/synth_dff.png)
 
 ## Example 4 — The latch trap (and the fix)
 
