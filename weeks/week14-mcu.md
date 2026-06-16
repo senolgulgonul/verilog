@@ -213,7 +213,7 @@ hardwired to 0), and a wider decoder that recognises arithmetic, branch, jump, a
 formats. The diagram below is a **single-cycle** RV32I datapath — one instruction per clock —
 which is exactly what the `design.v` further down implements:
 
-![Single-cycle RV32I datapath: the program counter feeds the instruction memory, which drives the register file and an immediate generator into the ALU; data memory and a write-back multiplexer return the result to the register file, while a separate adder computes branch and jal targets for the next program counter](../images/riscv_datapath.svg)
+![Single-cycle RV32I datapath: the program counter feeds the instruction memory, which drives the register file and an immediate generator into the ALU; data memory and a write-back multiplexer return the result to the register file, while a separate adder computes branch and jal targets for the next program counter](../images/riscv_datapath.png)
 
 Just like the `rom[]` in our 4-bit MCU, we embed the program directly as machine code — so this
 real (subset) RV32I core runs in VeriSim with **no toolchain**. It computes
