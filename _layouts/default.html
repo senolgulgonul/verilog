@@ -23,6 +23,8 @@
       .copy-btn.copied { color: #0a7d00; border-color: #0a7d00; }
       /* keep figures a sensible size instead of filling the whole column */
       .main-content img { max-width: 600px; width: 100%; height: auto; display: block; margin: 0.8em auto; }
+      /* cap long code listings at ~20 lines; scroll for the rest */
+      .main-content pre { max-height: 31em; overflow: auto; }
     </style>
     {% include head-custom.html %}
   </head>
