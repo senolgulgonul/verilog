@@ -1,9 +1,3 @@
-<style>
-/* Cap long code listings (design.v / testbench.v etc.) at ~20 lines; scroll for the rest.
-   Adjust the 31em to show more/fewer lines. */
-#content pre { line-height: 1.45; max-height: 31em; overflow: auto; }
-</style>
-
 # Week 14 — Microcontroller Architecture: Build a Tiny CPU
 
 ## The historical idea
@@ -62,7 +56,7 @@ built in **Digital** (Helmut Neemann): the ROM and program counter feed the inst
 two registers hold `ACC` and `B`, the ALU does add/sub, and the result is latched to the output
 and RAM — every block one you built in earlier weeks.
 
-![4-bit MCU schematic built in Digital: program counter and ROM drive an instruction bus into two registers (ACC and B) and an ALU; the ALU result is written back to a register and to RAM, clocked from a single clock](../images/EEE303_MCU.png)
+![4-bit MCU schematic (Digital): ROM, PC, ACC/B registers, ALU, output and RAM](../images/EEE303_MCU.png)
 
 **`design.v`**
 ```verilog
@@ -163,7 +157,7 @@ endmodule
 3. **Synthesize → RTL**: identify the ROM, the PC register, the ALU adder, and the state
    register — the CPU as the blocks you already know.
 
-## It's real: the same program in Arduino assembly
+## The same program on a real AVR
 
 The toy MCU is not a cartoon. The **AVR** chip on an Arduino Uno or Nano runs the *same kind* of
 program — `fetch → decode → execute` over its own ISA — and you can write that assembly by hand
@@ -213,7 +207,7 @@ hardwired to 0), and a wider decoder that recognises arithmetic, branch, jump, a
 formats. The diagram below is a **single-cycle** RV32I datapath — one instruction per clock —
 which is exactly what the `design.v` further down implements:
 
-![Single-cycle RV32I datapath: the program counter feeds the instruction memory, which drives the register file and an immediate generator into the ALU; data memory and a write-back multiplexer return the result to the register file, while a separate adder computes branch and jal targets for the next program counter](../images/riscv_datapath.png)
+![Single-cycle RV32I datapath: PC, instruction memory, register file, immediate gen, ALU, data memory, branch unit](../images/riscv_datapath.png)
 
 Just like the `rom[]` in our 4-bit MCU, we embed the program directly as machine code — so this
 real (subset) RV32I core runs in VeriSim with **no toolchain**. It computes
@@ -222,24 +216,10 @@ result to data memory.
 
 **`design.v`**
 ```verilog
-// =====================================================================
-//  design.v  -  Single-cycle RV32I (subset) educational RISC-V core
-//
-//  Synthesizable core only.  Pair with testbench.v in VeriSim.
-//  The instruction program is embedded inline (no $readmemh, no
-//  firmware, no toolchain).  Validated with Icarus Verilog 12.
-//
-//  Embedded program computes  sum = 1 + 2 + ... + 10 = 55,
-//  then stores it to data memory address 0.
-//
-//  Supported instructions:
-//    LUI, ADDI, ADD, SUB, AND, OR, XOR, SLL, SRL, SLT, SLTU,
-//    BEQ, BNE, BLT, JAL, LW, SW
-// =====================================================================
+// Single-cycle RV32I (subset). The program is embedded inline (no $readmemh,
+// no firmware), so it runs in VeriSim with no toolchain. Pair with testbench.v.
 
-// ---------------------------------------------------------------------
-//  Register file: 32 x 32-bit, x0 hardwired to 0
-// ---------------------------------------------------------------------
+// register file: 32 x 32-bit, x0 hardwired to 0
 module regfile(
     input             clk,
     input      [4:0]  rs1, rs2, rd,
@@ -250,28 +230,24 @@ module regfile(
     reg [31:0] r [0:31];
     integer k;
     initial for (k = 0; k < 32; k = k + 1) r[k] = 32'b0;
-
     assign rd1 = (rs1 == 5'd0) ? 32'b0 : r[rs1];
     assign rd2 = (rs2 == 5'd0) ? 32'b0 : r[rs2];
-
     always @(posedge clk)
         if (we && rd != 5'd0) r[rd] <= wd;
 endmodule
 
-// ---------------------------------------------------------------------
-//  CPU core
-// ---------------------------------------------------------------------
+// CPU core
 module cpu(
     input             clk,
     input             rst,
     output reg [31:0] pc,
-    output     [31:0] dmem0     // expose data memory word 0 for checking
+    output     [31:0] dmem0       // expose data memory word 0 for checking
 );
-    // ---- instruction memory (word addressed) ----
+    // instruction memory (word addressed)
     reg [31:0] imem [0:63];
     integer i;
     initial begin
-        for (i = 0; i < 64; i = i + 1) imem[i] = 32'h00000013; // NOP (addi x0,x0,0)
+        for (i = 0; i < 64; i = i + 1) imem[i] = 32'h00000013; // NOP
         imem[0] = 32'h00000093;   // addi x1, x0, 0     ; sum = 0
         imem[1] = 32'h00100113;   // addi x2, x0, 1     ; i = 1
         imem[2] = 32'h00b00193;   // addi x3, x0, 11    ; limit = 11
@@ -283,15 +259,15 @@ module cpu(
         imem[8] = 32'h0000006f;   // jal  x0, 0         ; halt (self loop)
     end
 
-    // ---- data memory ----
+    // data memory
     reg [31:0] dmem [0:63];
     initial for (i = 0; i < 64; i = i + 1) dmem[i] = 32'b0;
     assign dmem0 = dmem[0];
 
-    // ---- fetch ----
+    // fetch
     wire [31:0] instr = imem[pc[31:2]];
 
-    // ---- decode fields ----
+    // decode fields
     wire [6:0] opcode = instr[6:0];
     wire [4:0] rd     = instr[11:7];
     wire [2:0] f3     = instr[14:12];
@@ -299,7 +275,7 @@ module cpu(
     wire [4:0] rs2    = instr[24:20];
     wire [6:0] f7     = instr[31:25];
 
-    // ---- immediates ----
+    // immediates
     wire [31:0] immI = {{20{instr[31]}}, instr[31:20]};
     wire [31:0] immS = {{20{instr[31]}}, instr[31:25], instr[11:7]};
     wire [31:0] immB = {{19{instr[31]}}, instr[31], instr[7],
@@ -308,18 +284,18 @@ module cpu(
     wire [31:0] immJ = {{11{instr[31]}}, instr[31], instr[19:12],
                         instr[20], instr[30:21], 1'b0};
 
-    // ---- register file ----
+    // register file
     wire [31:0] rdata1, rdata2;
     reg         regwrite;
     reg  [31:0] wdata;
     regfile RF(.clk(clk), .rs1(rs1), .rs2(rs2), .rd(rd),
                .we(regwrite), .wd(wdata), .rd1(rdata1), .rd2(rdata2));
 
-    // ---- ALU result (combinational) ----
+    // ALU
     reg  [31:0] alu;
     always @(*) begin
         case (opcode)
-            7'b0010011: begin // I-type ALU (addi etc.)
+            7'b0010011: begin                  // I-type ALU
                 case (f3)
                     3'b000: alu = rdata1 + immI;                       // addi
                     3'b111: alu = rdata1 & immI;                       // andi
@@ -332,7 +308,7 @@ module cpu(
                     default: alu = 32'b0;
                 endcase
             end
-            7'b0110011: begin // R-type
+            7'b0110011: begin                  // R-type
                 case (f3)
                     3'b000: alu = (f7[5]) ? (rdata1 - rdata2) : (rdata1 + rdata2); // sub/add
                     3'b111: alu = rdata1 & rdata2;                     // and
@@ -345,53 +321,46 @@ module cpu(
                     default: alu = 32'b0;
                 endcase
             end
-            7'b0110111: alu = immU;                 // lui
-            7'b0000011: alu = rdata1 + immI;        // lw  (address)
-            7'b0100011: alu = rdata1 + immS;        // sw  (address)
+            7'b0110111: alu = immU;             // lui
+            7'b0000011: alu = rdata1 + immI;    // lw  (address)
+            7'b0100011: alu = rdata1 + immS;    // sw  (address)
             default:    alu = 32'b0;
         endcase
     end
 
-    // ---- branch decision ----
+    // branch decision
     reg branch_taken;
     always @(*) begin
         branch_taken = 1'b0;
-        if (opcode == 7'b1100011) begin
+        if (opcode == 7'b1100011)
             case (f3)
-                3'b000: branch_taken = (rdata1 == rdata2);                 // beq
-                3'b001: branch_taken = (rdata1 != rdata2);                 // bne
-                3'b100: branch_taken = ($signed(rdata1) < $signed(rdata2));// blt
+                3'b000: branch_taken = (rdata1 == rdata2);                  // beq
+                3'b001: branch_taken = (rdata1 != rdata2);                  // bne
+                3'b100: branch_taken = ($signed(rdata1) < $signed(rdata2)); // blt
                 default: branch_taken = 1'b0;
             endcase
-        end
     end
 
-    // ---- write-back source select ----
+    // write-back source select
     always @(*) begin
         regwrite = 1'b0;
         wdata    = 32'b0;
         case (opcode)
-            7'b0010011, 7'b0110011, 7'b0110111: begin regwrite = 1'b1; wdata = alu;        end // ALU / lui
+            7'b0010011, 7'b0110011, 7'b0110111: begin regwrite = 1'b1; wdata = alu;            end // ALU / lui
             7'b0000011:                         begin regwrite = 1'b1; wdata = dmem[alu[31:2]]; end // lw
-            7'b1101111:                         begin regwrite = 1'b1; wdata = pc + 32'd4;  end // jal -> rd
+            7'b1101111:                         begin regwrite = 1'b1; wdata = pc + 32'd4;      end // jal
             default: ;
         endcase
     end
 
-    // ---- next PC + sequential state ----
+    // next PC + sequential state
     always @(posedge clk) begin
-        if (rst) begin
-            pc <= 32'b0;
-        end else begin
-            if (opcode == 7'b0100011)            // sw
-                dmem[alu[31:2]] <= rdata2;
-
-            if (opcode == 7'b1101111)            // jal
-                pc <= pc + immJ;
-            else if (branch_taken)               // taken branch
-                pc <= pc + immB;
-            else
-                pc <= pc + 32'd4;
+        if (rst) pc <= 32'b0;
+        else begin
+            if (opcode == 7'b0100011) dmem[alu[31:2]] <= rdata2;   // sw
+            if      (opcode == 7'b1101111) pc <= pc + immJ;        // jal
+            else if (branch_taken)         pc <= pc + immB;        // taken branch
+            else                           pc <= pc + 32'd4;
         end
     end
 endmodule
@@ -399,39 +368,20 @@ endmodule
 
 **`testbench.v`**
 ```verilog
-// =====================================================================
-//  testbench.v  -  Self-checking testbench for the RV32I core
-//
-//  Top module for VeriSim.  Drives clock + reset, runs the embedded
-//  program, and prints PASS/FAIL by checking data memory word 0.
-// =====================================================================
-
+`timescale 1ns/1ps
 module tb;
     reg clk = 0, rst = 1;
     wire [31:0] pc, dmem0;
-
-    cpu DUT(.clk(clk), .rst(rst), .pc(pc), .dmem0(dmem0));
-
-    always #5 clk = ~clk;          // 100 MHz-ish
-
+    cpu M0(.clk(clk), .rst(rst), .pc(pc), .dmem0(dmem0));
+    always #5 clk = ~clk;
     integer cyc;
     initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0, tb);
-
-        // hold reset across the first clock edge, then release
-        rst = 1; #12; rst = 0;
-
-        // run enough cycles for the loop to finish and store
-        for (cyc = 0; cyc < 60; cyc = cyc + 1) @(posedge clk);
-
-        $display("------------------------------------------");
-        $display("dmem[0] (sum 1..10) = %0d", dmem0);
-        if (dmem0 === 32'd55)
-            $display("RESULT: PASS  (expected 55)");
-        else
-            $display("RESULT: FAIL  (expected 55, got %0d)", dmem0);
-        $display("------------------------------------------");
+        $dumpfile("dump.vcd"); $dumpvars(0, tb);
+        rst = 1; #12 rst = 0;                       // hold reset across first edge
+        for (cyc=0; cyc<60; cyc=cyc+1) @(posedge clk);  // run the program
+        $display("Program finished. dmem[0] = %0d (expected 55)", dmem0);
+        if (dmem0 === 32'd55) $display("RISC-V TEST PASSED");
+        else                  $display("RISC-V TEST FAILED");
         $finish;
     end
 endmodule
@@ -439,13 +389,11 @@ endmodule
 
 **Expected Console**
 ```
-------------------------------------------
-dmem[0] (sum 1..10) = 55
-RESULT: PASS  (expected 55)
-------------------------------------------
+Program finished. dmem[0] = 55 (expected 55)
+RISC-V TEST PASSED
 ```
 
-![RISC-V waveform in VeriSim: the program counter steps 0x0, 0x4, 0x8, then loops 0xc, 0x10, 0x14, 0x18 repeatedly as the instruction word cycles through the encoded program before the final store](../images/wave_riscv.png)
+![RISC-V waveform (VeriSim): pc loops 0xc->0x10->0x14->0x18 as instr cycles the program; dmem ends at 55](../images/wave_riscv.png)
 
 The waveform shows the loop body running: `pc` walks `0xc → 0x10 → 0x14 → 0x18` and jumps back to
 `0xc` ten times while `instr` cycles through the encoded words, leaving **55** in data memory at
