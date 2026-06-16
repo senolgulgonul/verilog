@@ -64,15 +64,15 @@ module mcu4(input clk, input rst, output reg [3:0] out, output reg halted);
     reg [3:0] acc, b;         // accumulator + B register
     reg [1:0] state;
 
-    initial begin             // program: 3 + 2 + 2 - 2 = 5
-        rom[0] = {LDA, 4'd3}; // ACC = 3
-        rom[1] = {LDB, 4'd2}; // B   = 2
-        rom[2] = {ADD, 4'd0}; // ACC = 5
-        rom[3] = {ADD, 4'd0}; // ACC = 7
-        rom[4] = {SUB, 4'd0}; // ACC = 5
-        rom[5] = {STS, 4'd0}; // OUT = 5
-        rom[6] = {HLT, 4'd0};
-        rom[7] = {HLT, 4'd0};
+    initial begin             // program bytes in HEX — these are exactly the values you see
+        rom[0] = 8'h13;       // LDA 3 : ACC = 3        (opcode 1, immediate 3)
+        rom[1] = 8'h22;       // LDB 2 : B   = 2        (opcode 2, immediate 2)
+        rom[2] = 8'h30;       // ADD   : ACC = 3 + 2 = 5
+        rom[3] = 8'h30;       // ADD   : ACC = 5 + 2 = 7
+        rom[4] = 8'h40;       // SUB   : ACC = 7 - 2 = 5
+        rom[5] = 8'h50;       // STS   : OUT = 5
+        rom[6] = 8'hF0;       // HLT
+        rom[7] = 8'hF0;       // HLT
     end
 
     always @(posedge clk or posedge rst) begin
@@ -96,6 +96,10 @@ module mcu4(input clk, input rst, output reg [3:0] out, output reg halted);
     end
 endmodule
 ```
+
+Each byte is **opcode (high nibble) + immediate (low nibble)**, so `0x13` decodes as opcode `1`
+(`LDA`) with immediate `3`, and `0xF0` is opcode `F` (`HLT`). These are exactly the hex values
+that step across `ir` in the waveform below — handy for tracing the program by eye.
 
 **`testbench.v`**
 ```verilog
@@ -121,7 +125,7 @@ endmodule
 Program finished. OUT = 5 (expected 5), halted = 1
 MCU TEST PASSED
 ```
-![MCU waveform: state cycles F-D-E; acc 3->5->7->5; out=5 and halted at the end](../images/wave_mcu.png)
+![MCU waveform (VeriSim): ir steps through the program bytes 0x13, 0x22, 0x30, 0x40, 0x50, 0xF0; acc 3->5->7->5; out=5 and halted at the end](../images/wave_mcu.png)
 
 ## Example 3 — on the board
 
