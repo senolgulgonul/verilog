@@ -1,66 +1,28 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>EEE 303 Verilog Lab + Tutor</title>
+<title>EEE 303 Verilog Lab</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
   html,body{margin:0;height:100%}
   body{display:flex;flex-direction:column;font-family:system-ui,sans-serif;background:#0f2429}
   .bar{font-size:14px;font-weight:600;padding:9px 16px;background:#157878;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;flex:0 0 auto}
-  .bar .tabs{display:none;gap:6px}
-  .bar .tabs button{font:600 12px system-ui;border:1px solid #bfe6e6;background:transparent;color:#bfe6e6;padding:5px 12px;border-radius:999px;cursor:pointer}
-  .bar .tabs button.on{background:#bfe6e6;color:#10242a}
-  .panes{flex:1;min-height:0;display:grid;grid-template-columns:58% 6px 1fr}
-  .panes iframe{width:100%;height:100%;border:0;display:block;background:#fff}
-  .split{background:#1d3a40;cursor:col-resize}
-  .split:hover{background:#16a0a0}
-  @media (max-width:900px){
-    .bar .tabs{display:flex}
-    .panes{grid-template-columns:1fr}
-    .split{display:none}
-    .panes .pane{display:none}
-    body[data-pane="lab"] .pane-lab{display:block}
-    body[data-pane="tutor"] .pane-tutor{display:block}
-  }
-  .pane{min-width:0}
+  .bar .right{display:flex;gap:10px;align-items:center}
+  .bar a.btn{font:600 13px system-ui;background:#bfe6e6;color:#10242a;padding:7px 14px;border-radius:999px;text-decoration:none}
+  .bar a.btn:hover{background:#fff}
+  .bar a.plain{color:#bfe6e6;text-decoration:none;font-size:13px}
+  .bar a.plain:hover{color:#fff}
+  .frame{flex:1;min-height:0}
+  .frame iframe{width:100%;height:100%;border:0;display:block;background:#fff}
 </style>
 
 <div class="bar">
-  <span>EEE 303 Verilog Lab + Tutor</span>
-  <span class="tabs">
-    <button id="tab-lab" class="on" onclick="setPane('lab')">VeriSim</button>
-    <button id="tab-tutor" onclick="setPane('tutor')">Tutor</button>
+  <span>EEE 303 Verilog Lab</span>
+  <span class="right">
+    <a class="plain" href="https://github.com/senolgulgonul/verilog">GitHub</a>
+    <a class="btn" href="https://claude.ai/public/artifacts/ec26db08-8efb-428e-8815-7849258a1872" target="_blank" rel="noopener">Open lessons + tutor ↗</a>
   </span>
 </div>
 
-<div class="panes" id="panes">
-  <div class="pane pane-lab" style="display:block">
-    <iframe id="verisim" src="https://senolgulgonul.github.io/verisim/" title="VeriSim" allow="clipboard-write"></iframe>
-  </div>
-  <div class="split" id="split"></div>
-  <div class="pane pane-tutor" style="display:block">
-    <iframe id="tutor" src="https://claude.site/public/artifacts/ec26db08-8efb-428e-8815-7849258a1872/embed"
-            title="Tutor" allow="clipboard-write" allowfullscreen></iframe>
-  </div>
+<div class="frame">
+  <iframe src="https://senolgulgonul.github.io/verisim/" title="VeriSim" allow="clipboard-write"></iframe>
 </div>
-
-<script>
-  // mobile tab toggle
-  document.body.setAttribute("data-pane","lab");
-  function setPane(p){
-    document.body.setAttribute("data-pane",p);
-    document.getElementById("tab-lab").classList.toggle("on",p==="lab");
-    document.getElementById("tab-tutor").classList.toggle("on",p==="tutor");
-  }
-  // draggable divider (desktop)
-  const sp=document.getElementById("split"), panes=document.getElementById("panes");
-  let drag=false;
-  sp.addEventListener("pointerdown",e=>{drag=true;sp.setPointerCapture(e.pointerId);});
-  sp.addEventListener("pointermove",e=>{
-    if(!drag)return;
-    const r=panes.getBoundingClientRect();
-    let pct=((e.clientX-r.left)/r.width)*100;
-    pct=Math.max(28,Math.min(75,pct));
-    panes.style.gridTemplateColumns=pct+"% 6px 1fr";
-  });
-  sp.addEventListener("pointerup",()=>{drag=false;});
-</script>
