@@ -7,8 +7,6 @@ browser), then implementing on the **Tang Nano 9K** FPGA.
 > **Şenol Gülgönül**, Assist. Prof. Dr.
 > Electrical & Electronics Engineering · Digital System Design
 
-**[▶ Open the live reader and tutor](tutor.html)** reads every week in the browser and answers questions about the lesson on screen, on each student's own Claude account.
-
 The course follows the **historical path of Verilog**:
 
 1. **Why Verilog exists** — to *test* manually designed circuits. So we begin by
