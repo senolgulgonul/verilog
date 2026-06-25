@@ -40,6 +40,8 @@ module fulladder(output S, Co, input A, B, Ci);
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder_tb.v)** — loads `w04_fulladder.v` + `w04_fulladder_tb.v` and runs (Verilog-2005).
+
 ## Example 2 — 4-bit ripple-carry adder (his `fourbitadder`)
 
 **`design.v`** (uses the flat `fulladder` from Week 1)
@@ -94,6 +96,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder_tb.v)** — loads `w04_fourbitadder.v` + `w04_fourbitadder_tb.v` and runs (Verilog-2005).
+
 **Expected Console:** `ALL 20 RANDOM TESTS PASSED`.
 
 ## Example 3 — Hierarchy reuse: a 4-bit 2-to-1 MUX
@@ -117,6 +121,8 @@ module mux2to1_4bit(output [3:0] Y, input [3:0] A, B, input S);
     mux2to1 M3(.Y(Y[3]), .A(A[3]), .B(B[3]), .S(S));
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit_tb.v)** — loads `w04_mux2to1_4bit.v` + `w04_mux2to1_4bit_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 

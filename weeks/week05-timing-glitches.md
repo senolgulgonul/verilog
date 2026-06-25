@@ -54,6 +54,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_fulladder_tb.v)** — loads `w05_fulladder.v` + `w05_fulladder_tb.v` and runs (Verilog-2005).
+
 On the waveform, `S` and `Co` update a few ns *after* the inputs — the propagation delay made
 visible. Set all delays to `#0` and the lag disappears (and so do glitches — which is the trap).
 
@@ -96,6 +98,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_hazard.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_hazard_tb.v)** — loads `w05_hazard.v` + `w05_hazard_tb.v` and runs (Verilog-2005).
+
 Zoom into the `A` transition on the waveform: `Y` briefly leaves 1, then recovers.
 
 ![Static-1 hazard: Y should hold 1 when A falls (B=C=1) but glitches low briefly](../images/wave_glitch.png)
@@ -122,6 +126,8 @@ module tb;
     end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_fourbitadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w05_fourbitadder_tb.v)** — loads `w05_fourbitadder.v` + `w05_fourbitadder_tb.v` and runs (Verilog-2005).
 
 Use the waveform cursor to measure the time from the `B` change to the final `C4` — it grows
 with the number of stages the carry must cross.

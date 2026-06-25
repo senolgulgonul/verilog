@@ -67,6 +67,8 @@ t=9 b=0 a=0 c=1
 t=11 b=0 a=0 c=0
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_nonblocking_example.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_nonblocking_example_tb.v)** — loads `w09_nonblocking_example.v` + `w09_nonblocking_example_tb.v` and runs (Verilog-2005).
+
 `c` lags `a` by one clock — a **pipeline**. When `b` becomes 1, `a` becomes 1 on the next edge,
 and only on the *following* edge does `c` (which sampled the old `a`) become 1.
 
@@ -93,6 +95,8 @@ module blocking_example(
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_blocking_example.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_blocking_example_tb.v)** — loads `w09_blocking_example.v` + `w09_blocking_example_tb.v` and runs (Verilog-2005).
+
 Run with the same testbench (rename the instance). `a` and `c` now move **together** — the
 one-cycle pipeline of example 1 is gone.
 
@@ -111,6 +115,8 @@ module swap_nb(input clk, input [3:0] init_x, init_y, input load,
 endmodule
 // Replace <= with = and x,y both become the same value (no swap).
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_swap_nb.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w09_swap_nb_tb.v)** — loads `w09_swap_nb.v` + `w09_swap_nb_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 

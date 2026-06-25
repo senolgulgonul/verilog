@@ -60,6 +60,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_dff.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_dff_tb.v)** — loads `w08_dff.v` + `w08_dff_tb.v` and runs (Verilog-2005).
+
 On the waveform `Q` follows `D`, but only **at each rising edge** — `Q` is a sampled, delayed
 copy of `D`.
 
@@ -100,6 +102,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_reg1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_reg1_tb.v)** — loads `w08_reg1.v` + `w08_reg1_tb.v` and runs (Verilog-2005).
+
 ## Example 3 — N-bit register and a shift register
 
 **`design.v`**
@@ -119,6 +123,8 @@ module shift4(input clk, input rst, input din, output reg [3:0] Q);
     end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_shift4.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w08_shift4_tb.v)** — loads `w08_shift4.v` + `w08_shift4_tb.v` and runs (Verilog-2005).
 
 Watch a single `1` walk through `Q` of the shift register on the waveform.
 

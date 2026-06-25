@@ -92,6 +92,8 @@ module bad_mux(input [1:0] sel, input a, b, c, d, output reg y);
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux_tb.v)** — loads `w10_bad_mux.v` + `w10_bad_mux_tb.v` and runs (Verilog-2005).
+
 Synthesize and read the latch warning. Add `default: y = a;` and the latch disappears.
 
 ## Run it in VeriSim

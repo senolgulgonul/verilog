@@ -66,6 +66,8 @@ ab:cs
 11:10
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder_tb.v)** — loads `w02_halfadder.v` + `w02_halfadder_tb.v` and runs (Verilog-2005).
+
 ![Half adder waveform (carry high only for AB=11)](../images/wave_halfadder.png)
 
 (Reading `cs`: the carry is high only for `11`.)
@@ -109,6 +111,8 @@ A B Ci : Co S
 1 1  1 :  1 1
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder_tb.v)** — loads `w02_fulladder.v` + `w02_fulladder_tb.v` and runs (Verilog-2005).
+
 ![Full adder waveform over all 8 input combinations](../images/wave_fulladder.png)
 
 ## Example 3 — Testbench for the 2-to-1 MUX
@@ -136,6 +140,8 @@ module tb;
     end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1_tb.v)** — loads `w02_mux2to1.v` + `w02_mux2to1_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 

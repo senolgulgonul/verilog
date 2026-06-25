@@ -37,6 +37,8 @@ module mux_2to1_ifelse(
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux_2to1_ifelse.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux_2to1_ifelse_tb.v)** — loads `w07_mux_2to1_ifelse.v` + `w07_mux_2to1_ifelse_tb.v` and runs (Verilog-2005).
+
 ## Example 2 — the same MUX with case
 
 **`design.v`**
@@ -54,6 +56,8 @@ module mux_2to1_case(
     end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux_2to1_case.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux_2to1_case_tb.v)** — loads `w07_mux_2to1_case.v` + `w07_mux_2to1_case_tb.v` and runs (Verilog-2005).
 
 ## Example 3 — 4-to-1 MUX with a vector select (port range)
 
@@ -102,6 +106,8 @@ Time=20 sel=10 a=0 b=1 c=1 d=1 y=1
 Time=30 sel=11 a=0 b=1 c=1 d=1 y=1
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux4to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_mux4to1_tb.v)** — loads `w07_mux4to1.v` + `w07_mux4to1_tb.v` and runs (Verilog-2005).
+
 ![mux4to1 waveform: y follows the selected input as sel steps 00->11](../images/wave_mux4to1.png)
 
 ## Example 4 — case with number literals (exam style)
@@ -127,6 +133,8 @@ module digit_select_df(input A, output [3:0] B);
     assign B = (A == 0) ? 4'd5 : 4'd4;
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_digit_select.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w07_digit_select_tb.v)** — loads `w07_digit_select.v` + `w07_digit_select_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 

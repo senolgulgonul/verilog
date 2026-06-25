@@ -58,6 +58,8 @@ AB:CS
 11:10
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith_tb.v)** — loads `w06_halfadder_arith.v` + `w06_halfadder_arith_tb.v` and runs (Verilog-2005).
+
 ## Example 2 — Operators on vectors (mini ALU slice)
 
 **`design.v`**
@@ -73,6 +75,8 @@ module alu_ops(
     assign lt      = (A < B);   // relational -> 1 bit
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops_tb.v)** — loads `w06_alu_ops.v` + `w06_alu_ops_tb.v` and runs (Verilog-2005).
 
 Drive `A=3,B=5` then `A=15,B=1`; expect `sum=8,diff=14,and_all=0,lt=1` then
 `sum=0,diff=14,and_all=1,lt=0` (4-bit wrap; `&A`=1 only when `A=15`).
@@ -90,6 +94,8 @@ module mux2to1(
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1_tb.v)** — loads `w06_mux2to1.v` + `w06_mux2to1_tb.v` and runs (Verilog-2005).
+
 ## Example 4 — 4-to-1 MUX with nested conditionals
 
 **`design.v`**
@@ -106,6 +112,8 @@ module mux4to1(
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1_tb.v)** — loads `w06_mux4to1.v` + `w06_mux4to1_tb.v` and runs (Verilog-2005).
+
 ## Example 5 — 4-bit adder, dataflow (compare with Week 4's structural one)
 
 **`design.v`**
@@ -118,6 +126,8 @@ module adder_4bit_simple(
     assign {carry, sum} = a + b;   // one line replaces the whole ripple chain
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple_tb.v)** — loads `w06_adder_4bit_simple.v` + `w06_adder_4bit_simple_tb.v` and runs (Verilog-2005).
 
 ## (Extra) Example 6 — User-Defined Primitive
 

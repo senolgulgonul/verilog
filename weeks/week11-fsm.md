@@ -98,6 +98,8 @@ A=0 B=0 C=1 D=0 -> Y=0
 A=0 B=0 C=0 D=1 -> Y=0
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w11_sequence_detector.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w11_sequence_detector_tb.v)** — loads `w11_sequence_detector.v` + `w11_sequence_detector_tb.v` and runs (Verilog-2005).
+
 `Y=1` appears exactly on the fifth input — the `A` that completes `B-A-B-A` (the leading `A` is
 ignored from `IDLE`).
 
@@ -129,6 +131,8 @@ module moore1011(input clk, input rst, input din, output detected);
     assign detected = (state == S4);   // Moore: from state only
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w11_moore1011.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w11_moore1011_tb.v)** — loads `w11_moore1011.v` + `w11_moore1011_tb.v` and runs (Verilog-2005).
 
 Feed `1011011` (bit0 first) and detection fires at bit#3 and the overlapping bit#6.
 

@@ -142,6 +142,8 @@ IO_LOC  "s2"  3;  IO_PORT "s2"  PULL_MODE=UP;
 IO_LOC  "led" 10; IO_PORT "led" PULL_MODE=UP DRIVE=8;
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_and_demo.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_and_demo_tb.v)** — loads `w12_and_demo.v` + `w12_and_demo_tb.v` and runs (Verilog-2005).
+
 ## Example 2 — Half adder on the board
 
 Reuse your verified `halfadder`: two buttons → two LEDs (sum and carry).
@@ -185,6 +187,8 @@ IO_LOC  "led[0]" 10; IO_PORT "led[0]" PULL_MODE=UP DRIVE=8;
 IO_LOC  "led[1]" 11; IO_PORT "led[1]" PULL_MODE=UP DRIVE=8;
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_half_adder_board.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_half_adder_board_tb.v)** — loads `w12_half_adder_board.v` + `w12_half_adder_board_tb.v` and runs (Verilog-2005).
+
 ## Example 3 — if-else pattern selector
 
 Press a button to switch between two LED patterns.
@@ -216,6 +220,8 @@ module tb;
   end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_ifelse_demo.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w12_ifelse_demo_tb.v)** — loads `w12_ifelse_demo.v` + `w12_ifelse_demo_tb.v` and runs (Verilog-2005).
 
 Expected (Icarus): `s1=1 -> 101010`, `s1=0 -> 010101` (depends on `s1` only).
 

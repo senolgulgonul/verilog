@@ -131,6 +131,8 @@ endmodule
 Program finished. OUT = 5 (expected 5), halted = 1
 MCU TEST PASSED
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w14_mcu4.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w14_mcu4_tb.v)** — loads `w14_mcu4.v` + `w14_mcu4_tb.v` and runs (Verilog-2005).
 ![MCU waveform (VeriSim): ir steps through the program bytes 0x13, 0x22, 0x30, 0x40, 0x50, 0xF0; acc 3->5->7->5; out=5 and halted at the end](../images/wave_mcu.png)
 
 ## Example 3 — on the board
@@ -394,6 +396,8 @@ endmodule
 Program finished. dmem[0] = 55 (expected 55)
 RISC-V TEST PASSED
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w14_cpu.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w14_cpu_tb.v)** — loads `w14_cpu.v` + `w14_cpu_tb.v` and runs (Verilog-2005).
 
 ![RISC-V waveform (VeriSim): pc loops 0xc->0x10->0x14->0x18 as instr cycles the program; dmem ends at 55](../images/wave_riscv.png)
 

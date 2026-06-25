@@ -51,6 +51,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_case_demo.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_case_demo_tb.v)** — loads `w13_case_demo.v` + `w13_case_demo_tb.v` and runs (Verilog-2005).
+
 Expected (Icarus): `111110, 111101, 111011, 110111` — one LED lit per combination.
 
 ## Example 2 — Using the clock: blink an LED
@@ -83,6 +85,8 @@ module tb;
   end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_blink.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_blink_tb.v)** — loads `w13_blink.v` + `w13_blink_tb.v` and runs (Verilog-2005).
 
 Expected (Icarus): with `WAIT=2`, `led` toggles every 3 clocks. The parameter keeps the logic identical and just shortens the wait for simulation.
 
@@ -130,6 +134,8 @@ module tb;
 endmodule
 ```
 
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_counter_leds.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_counter_leds_tb.v)** — loads `w13_counter_leds.v` + `w13_counter_leds_tb.v` and runs (Verilog-2005).
+
 Expected (Icarus): `count` increments and the lit bit in `walk` shifts left. Both modules live in this one `design.v`, so the testbench can drive both.
 
 ## Example 4 — Memory (ROM) on the board
@@ -163,6 +169,8 @@ module tb;
   end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_rom_demo.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_rom_demo_tb.v)** — loads `w13_rom_demo.v` + `w13_rom_demo_tb.v` and runs (Verilog-2005).
 
 Expected (Icarus): `leds = ~mem[addr]` for each address, one clock after `addr` changes.
 
@@ -209,6 +217,8 @@ module tb;
   end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_fsm_board.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_fsm_board_tb.v)** — loads `w13_fsm_board.v` + `w13_fsm_board_tb.v` and runs (Verilog-2005).
 
 Expected (Icarus): the LEDs walk `111111 -> 111110 -> 111101 -> 111011 -> 110111` as the press/release pattern is matched.
 
@@ -268,6 +278,8 @@ module tb;
   end
 endmodule
 ```
+
+> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_uart_tx.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w13_uart_tx_tb.v)** — loads `w13_uart_tx.v` + `w13_uart_tx_tb.v` and runs (Verilog-2005).
 
 Expected (Icarus): `tx` sends `0` (start), then `0x41` LSB-first (`1,0,0,0,0,0,1,0`), then `1` (stop); `busy` drops at the end.
 
