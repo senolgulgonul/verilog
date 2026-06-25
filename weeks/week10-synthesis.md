@@ -53,7 +53,7 @@ Use the gate-level `fulladder` (or the dataflow one) from earlier weeks.
 Press **Synthesize → Gates**: the function in primitive gates. Press **RTL**: the higher-level
 view. Since the design is already gate-level, the two look similar — a good first, simple case.
 
-> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_fulladder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_fulladder.v`; press **Synthesize** (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_fulladder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_fulladder.v`; press **Synthesize** (Verilog-2005).
 
 ## Example 2 — Hierarchy preserved: the 4-bit adder
 
@@ -63,7 +63,7 @@ view. Since the design is already gate-level, the two look similar — a good fi
 **Gates**: the same function flattened into AND/OR/NOT. Same circuit, two zoom levels — this
 answers "where did my modules go?"
 
-> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_fourbitadder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_fourbitadder.v`; press **Synthesize** (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w04_fourbitadder.v`; press **Synthesize** (Verilog-2005).
 
 ## Example 3 — A flip-flop synthesizes; an initial block does not
 
