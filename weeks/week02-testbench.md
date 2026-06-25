@@ -66,7 +66,7 @@ ab:cs
 11:10
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder_tb.v)** — loads `w02_halfadder.v` + `w02_halfadder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_halfadder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w02_halfadder.v` + `w02_halfadder_tb.v` and runs (Verilog-2005).
 
 ![Half adder waveform (carry high only for AB=11)](../images/wave_halfadder.png)
 
@@ -111,7 +111,7 @@ A B Ci : Co S
 1 1  1 :  1 1
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder_tb.v)** — loads `w02_fulladder.v` + `w02_fulladder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_fulladder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w02_fulladder.v` + `w02_fulladder_tb.v` and runs (Verilog-2005).
 
 ![Full adder waveform over all 8 input combinations](../images/wave_fulladder.png)
 
@@ -141,7 +141,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1_tb.v)** — loads `w02_mux2to1.v` + `w02_mux2to1_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w02_mux2to1_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w02_mux2to1.v` + `w02_mux2to1_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 

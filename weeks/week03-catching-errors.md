@@ -53,7 +53,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_buggy.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_buggy_tb.v)** — loads `w03_fulladder_buggy.v` + `w03_fulladder_buggy_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_buggy.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_buggy_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w03_fulladder_buggy.v` + `w03_fulladder_buggy_tb.v` and runs (Verilog-2005).
 
 Compare the printed `Co` column with the correct one (Week 2, example 2). The wrong design
 ![Full adder waveform: correct Co/S over all 8 cases (compare your DUT against this)](../images/wave_fulladder.png)
@@ -92,7 +92,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_tb.v)** — loads `w03_fulladder.v` + `w03_fulladder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w03_fulladder.v` + `w03_fulladder_tb.v` and runs (Verilog-2005).
 
 **Expected Console:** `ALL TESTS PASSED`. Put the **buggy** design back and the same testbench
 prints `FAIL` lines and a non-zero count — proof the test works.
@@ -128,7 +128,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_v2.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_v2_tb.v)** — loads `w03_fulladder_v2.v` + `w03_fulladder_v2_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_v2.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w03_fulladder_v2_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w03_fulladder_v2.v` + `w03_fulladder_v2_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim — then break it on purpose
 

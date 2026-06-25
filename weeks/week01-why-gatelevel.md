@@ -67,7 +67,7 @@ module twoand(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_twoand.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_twoand_tb.v)** — loads `w01_twoand.v` + `w01_twoand_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_twoand.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_twoand_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_twoand.v` + `w01_twoand_tb.v` and runs (Verilog-2005).
 
 ## Example 3 — Full adder (more gates, more wires)
 
@@ -87,7 +87,7 @@ module fulladder(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_fulladder_tb.v)** — loads `w01_fulladder.v` + `w01_fulladder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_fulladder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_fulladder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_fulladder.v` + `w01_fulladder_tb.v` and runs (Verilog-2005).
 
 ![Full adder: G0,G1 XOR; G2,G3 AND; G4 OR; wires W1,W2,W3](../images/fulladder.png)
 
@@ -108,7 +108,7 @@ module mux2to1(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_mux2to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_mux2to1_tb.v)** — loads `w01_mux2to1.v` + `w01_mux2to1_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_mux2to1.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_mux2to1_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_mux2to1.v` + `w01_mux2to1_tb.v` and runs (Verilog-2005).
 
 ![Gate-level 2-to-1 MUX: G3 NOT, G1/G2 AND, G4 OR, internal wire W1](../images/mux2to1.png)
 
@@ -154,7 +154,7 @@ G A1 A0 : Y3 Y2 Y1 Y0
 1  1  1 :  0  1  1  1
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_decoder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_decoder_tb.v)** — loads `w01_decoder.v` + `w01_decoder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_decoder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_decoder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_decoder.v` + `w01_decoder_tb.v` and runs (Verilog-2005).
 
 > The IC logic diagram for this part lives in the manufacturer datasheet (TI **SN74HCS139**,
 > "One of Two 2:4 Decoders"). Rather than copy that figure, the gate-level code above is your
@@ -187,7 +187,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_halfadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_halfadder_tb.v)** — loads `w01_halfadder.v` + `w01_halfadder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_halfadder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w01_halfadder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w01_halfadder.v` + `w01_halfadder_tb.v` and runs (Verilog-2005).
 
 3. **Run**, read the **Console**, open the **Waveform** (scroll=zoom, drag=pan, click=cursor).
 

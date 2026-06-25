@@ -53,6 +53,8 @@ Use the gate-level `fulladder` (or the dataflow one) from earlier weeks.
 Press **Synthesize → Gates**: the function in primitive gates. Press **RTL**: the higher-level
 view. Since the design is already gate-level, the two look similar — a good first, simple case.
 
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_fulladder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_fulladder.v`; press **Synthesize** (Verilog-2005).
+
 ## Example 2 — Hierarchy preserved: the 4-bit adder
 
 **`design.v`** — `fulladder` + `fourbitadder` (Week 4).
@@ -60,6 +62,8 @@ view. Since the design is already gate-level, the two look similar — a good fi
 **Synthesize → RTL**: four `fulladder` blocks in a carry chain — *your* hierarchy, preserved.
 **Gates**: the same function flattened into AND/OR/NOT. Same circuit, two zoom levels — this
 answers "where did my modules go?"
+
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_fourbitadder.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_fourbitadder.v`; press **Synthesize** (Verilog-2005).
 
 ## Example 3 — A flip-flop synthesizes; an initial block does not
 
@@ -71,6 +75,8 @@ module DFF(output reg Q, input D, CLK);
     always @(posedge CLK) Q <= D;     // synthesizes to ONE flip-flop
 endmodule
 ```
+
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_dff.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_dff_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_dff.v` + `w10_dff_tb.v` and runs (Verilog-2005).
 
 **Synthesize → RTL** shows a single D flip-flop cell. Add a stray `initial Q = 0;` and note it
 is a power-up value on an FPGA, not logic — it creates no gate.
@@ -92,7 +98,7 @@ module bad_mux(input [1:0] sel, input a, b, c, d, output reg y);
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux_tb.v)** — loads `w10_bad_mux.v` + `w10_bad_mux_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w10_bad_mux_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w10_bad_mux.v` + `w10_bad_mux_tb.v` and runs (Verilog-2005).
 
 Synthesize and read the latch warning. Add `default: y = a;` and the latch disappears.
 

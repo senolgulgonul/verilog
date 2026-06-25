@@ -58,7 +58,7 @@ AB:CS
 11:10
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith_tb.v)** — loads `w06_halfadder_arith.v` + `w06_halfadder_arith_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_halfadder_arith_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w06_halfadder_arith.v` + `w06_halfadder_arith_tb.v` and runs (Verilog-2005).
 
 ## Example 2 — Operators on vectors (mini ALU slice)
 
@@ -76,7 +76,7 @@ module alu_ops(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops_tb.v)** — loads `w06_alu_ops.v` + `w06_alu_ops_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_alu_ops_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w06_alu_ops.v` + `w06_alu_ops_tb.v` and runs (Verilog-2005).
 
 Drive `A=3,B=5` then `A=15,B=1`; expect `sum=8,diff=14,and_all=0,lt=1` then
 `sum=0,diff=14,and_all=1,lt=0` (4-bit wrap; `&A`=1 only when `A=15`).
@@ -94,7 +94,7 @@ module mux2to1(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1_tb.v)** — loads `w06_mux2to1.v` + `w06_mux2to1_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux2to1_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w06_mux2to1.v` + `w06_mux2to1_tb.v` and runs (Verilog-2005).
 
 ## Example 4 — 4-to-1 MUX with nested conditionals
 
@@ -112,7 +112,7 @@ module mux4to1(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1_tb.v)** — loads `w06_mux4to1.v` + `w06_mux4to1_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_mux4to1_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w06_mux4to1.v` + `w06_mux4to1_tb.v` and runs (Verilog-2005).
 
 ## Example 5 — 4-bit adder, dataflow (compare with Week 4's structural one)
 
@@ -127,7 +127,7 @@ module adder_4bit_simple(
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple_tb.v)** — loads `w06_adder_4bit_simple.v` + `w06_adder_4bit_simple_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w06_adder_4bit_simple_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w06_adder_4bit_simple.v` + `w06_adder_4bit_simple_tb.v` and runs (Verilog-2005).
 
 ## (Extra) Example 6 — User-Defined Primitive
 

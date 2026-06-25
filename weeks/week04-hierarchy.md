@@ -40,7 +40,7 @@ module fulladder(output S, Co, input A, B, Ci);
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder_tb.v)** — loads `w04_fulladder.v` + `w04_fulladder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fulladder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w04_fulladder.v` + `w04_fulladder_tb.v` and runs (Verilog-2005).
 
 ## Example 2 — 4-bit ripple-carry adder (his `fourbitadder`)
 
@@ -96,7 +96,7 @@ module tb;
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder_tb.v)** — loads `w04_fourbitadder.v` + `w04_fourbitadder_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_fourbitadder_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w04_fourbitadder.v` + `w04_fourbitadder_tb.v` and runs (Verilog-2005).
 
 **Expected Console:** `ALL 20 RANDOM TESTS PASSED`.
 
@@ -122,7 +122,7 @@ module mux2to1_4bit(output [3:0] Y, input [3:0] A, B, input S);
 endmodule
 ```
 
-> ▶ **[Open in VeriSim](https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit.v&testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit_tb.v)** — loads `w04_mux2to1_4bit.v` + `w04_mux2to1_4bit_tb.v` and runs (Verilog-2005).
+> ▶ <strong><a href="https://senolgulgonul.github.io/verisim/?design=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit.v&amp;testbench=https://raw.githubusercontent.com/senolgulgonul/verilog/main/w04_mux2to1_4bit_tb.v" target="_blank" rel="noopener">Open in VeriSim</a></strong> — loads `w04_mux2to1_4bit.v` + `w04_mux2to1_4bit_tb.v` and runs (Verilog-2005).
 
 ## Run it in VeriSim
 
