@@ -2,10 +2,10 @@
 module tb;
   reg  clk;
   reg  [3:0] init_x;
-  reg  init_y;
+  reg  [3:0] init_y;
   reg  load;
   wire [3:0] x;
-  wire y;
+  wire [3:0] y;
   integer i;
   swap_nb dut(.clk(clk), .init_x(init_x), .init_y(init_y), .load(load), .x(x), .y(y));
   initial clk=0;  always #5 clk=~clk;
