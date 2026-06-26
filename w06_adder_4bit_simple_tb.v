@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 module tb;
   reg  [3:0] a;
-  reg  b;
+  reg  [3:0] b;
   wire [3:0] sum;
   wire carry;
   integer i;
