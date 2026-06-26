@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 module tb;
   reg  [3:0] A;
-  reg  [3:0]B;
+  reg  [3:0] B;
   wire [3:0] sum;
   wire [3:0] diff;
   wire and_all;
